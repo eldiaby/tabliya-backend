@@ -5,7 +5,7 @@
 const asyncHandler = require('express-async-handler');
 const { StatusCodes } = require('http-status-codes');
 
-// 🗂️ Local Imports
+// 🗂️ Models
 const Table = require('../models/tableModel.js');
 
 // -----------------------------------------------------------------------------

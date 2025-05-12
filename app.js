@@ -7,7 +7,7 @@ require('./config/env');
 const express = require('express'); // Express framework
 const morgan = require('morgan'); // HTTP request logger middleware
 const cookieParser = require('cookie-parser'); // Cookie parser middleware
-const fileUpload = require('express-fileupload'); // File upload middleware
+// const fileUpload = require('express-fileupload'); // File upload middleware
 const ms = require('ms');
 
 /* ─────────────────────────────────────────────────────── */
@@ -24,7 +24,8 @@ const cors = require('cors');
 /* ─────────────────────────────────────────────────────── */
 const connectDB = require('./config/db.js'); // Database connection
 const authRouter = require('./routes/authRoutes.js'); // Auth routes
-const tableRouter = require('./routes/tableRoutes.js'); // Auth routes
+const tableRouter = require('./routes/tableRoutes.js'); // Table routes
+const dishRouter = require('./routes/dishRoutes.js'); // Dish routes
 
 /* ─────────────────────────────────────────────────────── */
 /* 🧱 Custom Middleware */
@@ -64,7 +65,7 @@ app.use(cors());
 /* ─────────────────────────────────────────────────────── */
 app.use(express.json()); // Parse incoming JSON payloads
 app.use(cookieParser(process.env.JWT_SECRET_KEY)); // Parse signed cookies
-app.use(fileUpload()); // Handle file uploads
+// app.use(fileUpload()); // Handle file uploads
 app.use(express.static(`${__dirname}/public`)); // Serve static files from "public" folder
 
 /* ─────────────────────────────────────────────────────── */
@@ -82,8 +83,9 @@ app.get('/api/v1/', (req, res) => {
   res.send('📦 This is the GET route for the tabliya project');
 });
 
-app.use('/api/v1/auth', authRouter);
-app.use('/api/v1/tables', tableRouter);
+app.use('/api/v1/auth', authRouter); // Auth
+app.use('/api/v1/tables', tableRouter); //Tables
+app.use('/api/v1/dishes', dishRouter); //Dishes
 
 /* ─────────────────────────────────────────────────────── */
 /* ⚠️ Error Handling */
