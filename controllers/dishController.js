@@ -31,6 +31,25 @@ module.exports.getAllDishes = asyncHandler(async (req, res, next) => {
 });
 
 // -----------------------------------------------------------------------------
+// 🍽️ Get Available Dishes Function
+// -----------------------------------------------------------------------------
+/**
+ * @description Retrieves all available dishes from the database
+ * @route GET /api/v1/dishes/available
+ * @access Public
+ * @returns {Object} JSON response with success status, count, and data (list of available dishes)
+ */
+module.exports.getAvailableDishes = asyncHandler(async (req, res, next) => {
+  const dishes = await Dish.find({ available: true });
+
+  res.status(StatusCodes.OK).json({
+    success: true,
+    count: dishes.length,
+    data: dishes,
+  });
+});
+
+// -----------------------------------------------------------------------------
 // 🍽️ Get Single Dish Function
 // -----------------------------------------------------------------------------
 /**

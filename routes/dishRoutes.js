@@ -23,6 +23,8 @@ router
     dishController.createDish
   );
 
+router.route('/available').get(dishController.getAvailableDishes);
+
 router
   .route('/:id')
   .get(validateObjectId, dishController.getDish)
